@@ -23,6 +23,7 @@
     "@swimlane/ngx-charts": "^22.0.0-alpha.0",
     "ag-grid-angular": "^33.1.1",
     "ag-grid-community": "^33.1.1",
+    "angular-cli-ghpages": "^2.0.3",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
