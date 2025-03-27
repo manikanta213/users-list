@@ -7,7 +7,7 @@ body {
   }
   
   .scroll-container {
-    height: 1500vh; /* Increased for smoother transitions */
+    height: 1000vh; /* Increased for smoother transitions */
   }
   
   .container {
