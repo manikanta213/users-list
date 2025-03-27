@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .scroll-container {
+    height: 1500vh; /* Increased for smoother transitions */
+  }
+  
+  .container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .test-tube {
+    background: linear-gradient(135deg, #ff8a00, #e52e71);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 rgba(255, 138, 0, 0);
+    overflow: hidden;
+    will-change: width, height, border-radius, box-shadow, filter;
+    filter: brightness(1);
+  }
+  
+  .text-container {
+    width: 90%;
+    padding: 0 5%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .text {
+    position: absolute;
+    width: 80%;
+    text-align: center;
+    font-size: 24px;
+    opacity: 0;
+    transform: translateY(40px);
+    padding: 0 10%;
+    box-sizing: border-box;
+    will-change: opacity, transform;
+    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+  }
+  
+  .end-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    opacity: 0;
+    transform: scale(0.5);
+    will-change: opacity, transform;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+    color: #ff8a00;
+    font-weight: bold;
+    pointer-events: none;
+  }

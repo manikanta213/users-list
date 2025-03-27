@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 border-end pe-md-4 pe-0">
+        <div class="d-flex align-items-center justify-content-between">
+          <h4>Users List</h4>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="search" [(ngModel)]="searchText" placeholder="Search..." (input)="filterUsers()" />
+            <label for="search">Search</label>
+          </div>
+        </div>
+        <div class="users-scroll">
+          <ul *ngIf="filteredUsers.length > 0" class="user-list list-unstyled" style="margin-right: 10px;">
+            <li *ngFor="let user of filteredUsers" class="user-item mb-3 p-3 border rounded" style="cursor: pointer;" (dblclick)="editUser(user)">
+              <div class="row">
+                <p class="col-md-6 col-12"><strong>First Name:</strong> {{ user.firstName }}</p>
+                <p class="col-md-6 col-12"><strong>Last Name:</strong> {{ user.lastName }}</p>
+              </div>
+              <p><strong>Date of Birth:</strong> {{ user.dob | date: 'longDate' }}</p>
+              <p><strong>Address:</strong> {{ user.address }}</p>
+              <button (click)="deleteUser(user.id)" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </li>
+          </ul>
+          <div *ngIf="filteredUsers.length === 0" class="text-muted">
+            <p>No user data available.</p>
+          </div>
+        </div>
+        <nav aria-label="Page navigation" style="margin-top: 10px; margin-bottom: 10px;">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" (click)="previousPage()">Previous</button>
+            </li>
+      
+            <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="currentPage === (i + 1)">
+              <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+            </li>
+      
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" (click)="nextPage()">Next</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-6">
+        <h4>{{ isEditMode ? 'Edit User' : 'Add New User' }}</h4>
+        <div class="adduser-scroll">
+          <div style="margin-right: 10px;">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="firstName" [(ngModel)]="userFormData.firstName" name="firstName"
+                placeholder="First Name" />
+              <label for="firstName">First Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="lastName" [(ngModel)]="userFormData.lastName" name="lastName"
+                placeholder="Last Name" />
+              <label for="lastName">Last Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control" id="dob" [(ngModel)]="userFormData.dob" name="dob"
+                placeholder="Date of Birth" />
+              <label for="dob">Date of Birth</label>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea class="form-control" id="villageName" [(ngModel)]="userFormData.address" name="address"
+                placeholder="Enter Village Name" (input)="filterVillages()" style="height: 100px;" ></textarea>
+              <label for="villageName">Village Name</label>
+            </div>
+            
+            <ul *ngIf="filteredVillages.length > 0" class="autocomplete-list">
+              <li
+                *ngFor="let village of filteredVillages"
+                (click)="selectVillage(village)"
+                class="autocomplete-item"
+              >
+                {{ village }}
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+        <div class="float-end" style="margin-top: 10px;">
+          <button class="btn btn-primary" (click)="submitData()">
+            {{ isEditMode ? 'Update' : 'Submit' }}
+          </button>
+          <button *ngIf="!isEditMode" (click)="resetForm()" class="btn btn-secondary ms-2">Clear</button>
+          <button *ngIf="isEditMode" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancel</button>
+          <button class="btn btn-success ms-2" (click)="redirectToEffect()">Redirect</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <router-outlet></router-outlet>
